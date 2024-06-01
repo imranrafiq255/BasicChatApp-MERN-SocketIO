@@ -1,0 +1,12 @@
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const dbConnection = require("./config/db.config");
+require("dotenv").config();
+const app = express();
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+dbConnection();
+const user = require("./routes/user.routes");
+app.use("/api/v1/user", user);
+module.exports = app;
